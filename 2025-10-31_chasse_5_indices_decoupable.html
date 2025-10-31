@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chasse au Trésor - 5 Indices à Découper</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 10mm;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background-color: white;
+            padding: 10mm;
+        }
+
+        .container {
+            width: 190mm;
+            margin: 0 auto;
+        }
+
+        .indice-bande {
+            width: 100%;
+            height: 55mm;
+            margin-bottom: 3mm;
+            border: 3px dashed #333;
+            border-radius: 10px;
+            padding: 15px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFECB3 100%);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            page-break-inside: avoid;
+        }
+
+        .indice-bande.final {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #FF6B6B;
+            padding-bottom: 8px;
+        }
+
+        .numero {
+            font-size: 22px;
+            font-weight: bold;
+            color: #FF6B6B;
+            letter-spacing: 1px;
+        }
+
+        .emoji {
+            font-size: 28px;
+        }
+
+        .texte-indice {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+            line-height: 1.4;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+            border-top: 1px dashed #999;
+            padding-top: 8px;
+        }
+
+        .cachette {
+            font-weight: bold;
+            color: #444;
+        }
+
+        .scissors {
+            font-size: 18px;
+            color: #999;
+        }
+
+        .titre-page {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #FF6B6B;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .instructions {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        @media print {
+            body {
+                padding: 10mm;
+            }
+            .indice-bande {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="titre-page">🗺️ Chasse au Trésor 🗺️</div>
+    <div class="instructions">✂️ Découper chaque bande suivant les pointillés ✂️</div>
+
+    <!-- INDICE 1 -->
+    <div class="indice-bande">
+        <div class="header">
+            <div class="numero">⭐ INDICE N°1 ⭐</div>
+            <div class="emoji">🔥</div>
+        </div>
+        <div class="texte-indice">
+            Là où maman fait cuire les gâteaux,<br>
+            Ouvre-moi et tu trouveras ton cadeau !
+        </div>
+        <div class="footer">
+            <span class="cachette">📍 Cachette : Sur la table de départ</span>
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- INDICE 2 -->
+    <div class="indice-bande">
+        <div class="header">
+            <div class="numero">⭐ INDICE N°2 ⭐</div>
+            <div class="emoji">🛋️</div>
+        </div>
+        <div class="texte-indice">
+            Soulève ce qui est doux sur le canapé,<br>
+            Le prochain indice tu découvriras !
+        </div>
+        <div class="footer">
+            <span class="cachette">📍 Cachette : Dans le four</span>
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- INDICE 3 -->
+    <div class="indice-bande">
+        <div class="header">
+            <div class="numero">⭐ INDICE N°3 ⭐</div>
+            <div class="emoji">🎮</div>
+        </div>
+        <div class="texte-indice">
+            Là où papa conduit sa voiture virtuelle,<br>
+            Regarde sous son siège de course !
+        </div>
+        <div class="footer">
+            <span class="cachette">📍 Cachette : Sous un coussin du canapé</span>
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- INDICE 4 -->
+    <div class="indice-bande">
+        <div class="header">
+            <div class="numero">⭐ INDICE N°4 ⭐</div>
+            <div class="emoji">🛏️</div>
+        </div>
+        <div class="texte-indice">
+            Là où tu poses ta tête pour rêver la nuit,<br>
+            Soulève ton oreiller sans faire de bruit !
+        </div>
+        <div class="footer">
+            <span class="cachette">📍 Cachette : Dessous du siège de sim racing</span>
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- INDICE 5 - FINAL -->
+    <div class="indice-bande final">
+        <div class="header">
+            <div class="numero">🏆 INDICE FINAL 🏆</div>
+            <div class="emoji">🎁</div>
+        </div>
+        <div class="texte-indice">
+            Twingo et Marcel mangent là chaque jour,<br>
+            Regarde dans leur gamelle et trouve ton trésor !
+        </div>
+        <div class="footer">
+            <span class="cachette">📍 Cachette : Sous ton oreiller</span>
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+</div>
+
+<div style="margin-top: 30px; padding: 20px; background-color: #f0f0f0; border-radius: 10px; text-align: center;">
+    <p style="font-size: 18px; font-weight: bold; color: #FF6B6B; margin-bottom: 10px;">
+        📝 ORDRE DE LA CHASSE
+    </p>
+    <p style="font-size: 14px; line-height: 1.8; color: #333;">
+        <strong>Indice 1</strong> (départ) → <strong>Four</strong> →
+        <strong>Indice 2</strong> → <strong>Canapé</strong> →
+        <strong>Indice 3</strong> → <strong>Sim Racing</strong> →
+        <strong>Indice 4</strong> → <strong>Oreiller Capu</strong> →
+        <strong>Indice 5</strong> → <strong>🎁 GAMELLE TWINGO/MARCEL 🎁</strong>
+    </p>
+    <p style="font-size: 12px; color: #666; margin-top: 15px; font-style: italic;">
+        💡 Conseil : Cachez les indices dans l'ordre inverse (commencez par l'indice 5 dans la gamelle)
+    </p>
+</div>
+
+</body>
+</html>

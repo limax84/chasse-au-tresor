@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indice Chasse au Trésor</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background-color: white;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            padding: 20mm;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            page-break-after: always;
+        }
+
+        .indice-box {
+            border: 8px double #FF6B6B;
+            border-radius: 20px;
+            padding: 40px;
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFECB3 100%);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .numero {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FF6B6B;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .texte-indice {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin: 30px 0;
+            line-height: 1.6;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cachette {
+            font-size: 16px;
+            color: #666;
+            margin-top: 30px;
+            font-style: italic;
+            border-top: 2px dashed #FF6B6B;
+            padding-top: 20px;
+        }
+
+        .emoji {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        @media print {
+            .page {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- INDICE 1 -->
+<div class="page">
+    <div class="indice-box">
+        <div class="emoji">🗺️</div>
+        <div class="numero">⭐ Indice N° 1 ⭐</div>
+        <div class="texte-indice">
+            [Écrivez votre indice ici - 1 à 2 lignes maximum]
+        </div>
+        <div class="cachette">
+            📍 Cachette de cet indice : [LIEU - ex: sur la table]
+        </div>
+    </div>
+</div>
+
+<!-- INDICE 2 -->
+<div class="page">
+    <div class="indice-box">
+        <div class="emoji">🔍</div>
+        <div class="numero">⭐ Indice N° 2 ⭐</div>
+        <div class="texte-indice">
+            [Écrivez votre indice ici]
+        </div>
+        <div class="cachette">
+            📍 Cachette de cet indice : [LIEU]
+        </div>
+    </div>
+</div>
+
+<!-- INDICE 3 -->
+<div class="page">
+    <div class="indice-box">
+        <div class="emoji">🎯</div>
+        <div class="numero">⭐ Indice N° 3 ⭐</div>
+        <div class="texte-indice">
+            [Écrivez votre indice ici]
+        </div>
+        <div class="cachette">
+            📍 Cachette de cet indice : [LIEU]
+        </div>
+    </div>
+</div>
+
+<!-- INDICE 4 -->
+<div class="page">
+    <div class="indice-box">
+        <div class="emoji">🧭</div>
+        <div class="numero">⭐ Indice N° 4 ⭐</div>
+        <div class="texte-indice">
+            [Écrivez votre indice ici]
+        </div>
+        <div class="cachette">
+            📍 Cachette de cet indice : [LIEU]
+        </div>
+    </div>
+</div>
+
+<!-- INDICE 5 -->
+<div class="page">
+    <div class="indice-box">
+        <div class="emoji">🏴‍☠️</div>
+        <div class="numero">⭐ Indice N° 5 ⭐</div>
+        <div class="texte-indice">
+            [Écrivez votre indice ici]
+        </div>
+        <div class="cachette">
+            📍 Cachette de cet indice : [LIEU]
+        </div>
+    </div>
+</div>
+
+<!-- INDICE FINAL -->
+<div class="page">
+    <div class="indice-box" style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);">
+        <div class="emoji">🎁</div>
+        <div class="numero" style="color: #8B4513;">🏆 Dernier Indice ! 🏆</div>
+        <div class="texte-indice">
+            [Dernier indice menant au trésor !]
+        </div>
+        <div class="cachette" style="border-top-color: #8B4513;">
+            📍 Cachette de cet indice : [LIEU]
+        </div>
+    </div>
+</div>
+
+<!-- MESSAGE FINAL / TRÉSOR -->
+<div class="page">
+    <div class="indice-box" style="background: linear-gradient(135deg, #FFE5E5 0%, #FFB6C1 100%); border-color: #FF1493;">
+        <div class="emoji">🎉</div>
+        <div class="numero" style="color: #FF1493;">✨ BRAVO ! TU AS TROUVÉ ! ✨</div>
+        <div class="texte-indice" style="font-size: 24px;">
+            [Message de félicitations personnalisé]
+        </div>
+        <div class="cachette" style="border-top-color: #FF1493;">
+            🎁 Voici ta récompense !
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

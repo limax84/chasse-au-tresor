@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chasse au Trésor Collaborative - 3 Parcours</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 10mm;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background-color: white;
+            padding: 8mm;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        .container {
+            width: 190mm;
+            margin: 0 auto;
+        }
+
+        .titre-principal {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .introduction {
+            background: linear-gradient(135deg, #FFE5E5 0%, #E3F2FD 100%);
+            border: 4px solid #FF6B6B;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .intro-titre {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FF6B6B;
+            margin-bottom: 15px;
+        }
+
+        .intro-texte {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .intro-important {
+            font-size: 18px;
+            font-weight: bold;
+            color: #FF1493;
+            background-color: #FFFACD;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .section-titre {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .indice-bande {
+            width: 100%;
+            height: 50mm;
+            margin-bottom: 3mm;
+            border: 3px dashed #333;
+            border-radius: 10px;
+            padding: 12px 12px 12px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            page-break-inside: avoid;
+            position: relative;
+        }
+
+        .indice-bande.capucine {
+            background: linear-gradient(135deg, #E1BEE7 0%, #CE93D8 100%);
+            border-color: #8E24AA;
+        }
+
+        .indice-bande.capucine .numero {
+            color: #6A1B9A;
+        }
+
+        .indice-bande.mathilde {
+            background: linear-gradient(135deg, #F8BBD0 0%, #F48FB1 100%);
+            border-color: #C2185B;
+        }
+
+        .indice-bande.mathilde .numero {
+            color: #880E4F;
+        }
+
+        .indice-bande.maxime {
+            background: linear-gradient(135deg, #B3E5FC 0%, #81D4FA 100%);
+            border-color: #0277BD;
+        }
+
+        .indice-bande.maxime .numero {
+            color: #01579B;
+        }
+
+        .indice-bande.final {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            border-color: #FF8C00;
+            height: 60mm;
+            padding-left: 12px;
+        }
+
+        .indice-bande.final .cachette {
+            display: none;
+        }
+
+        .indice-bande.final .numero {
+            color: #8B4513;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid;
+            padding-bottom: 6px;
+        }
+
+        .numero {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .emoji {
+            font-size: 26px;
+        }
+
+        .texte-indice {
+            font-size: 17px;
+            font-weight: bold;
+            color: #1a1a1a;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 0;
+            line-height: 1.3;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            font-size: 13px;
+            color: #999;
+            border-top: 1px dashed #666;
+            padding-top: 6px;
+        }
+
+        .cachette {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 45px;
+            background-color: rgba(0,0,0,0.15);
+            border-right: 2px dashed #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: bold;
+            color: #222;
+            padding: 8px 3px;
+            border-radius: 10px 0 0 10px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            line-height: 1.2;
+        }
+
+        .scissors {
+            font-size: 16px;
+            color: #999;
+        }
+
+        .code-box {
+            background-color: #FFFACD;
+            border: 3px solid #FFD700;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .code-titre {
+            font-size: 20px;
+            font-weight: bold;
+            color: #FF6B6B;
+            margin-bottom: 10px;
+        }
+
+        .code-valeur {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 15px;
+        }
+
+        @media print {
+            body {
+                padding: 8mm;
+            }
+            .indice-bande {
+                page-break-inside: avoid;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- PAGE D'INTRODUCTION -->
+<div class="container">
+    <div class="titre-principal">🗺️ Chasse au Trésor Collaborative 🗺️</div>
+
+    <div class="introduction">
+        <div class="intro-titre">⚔️ MISSION EN ÉQUIPE ⚔️</div>
+        <div class="intro-texte">
+            <strong>Capucine</strong> (Violet 💜), <strong>Mathilde</strong> (Rose 💗) et <strong>Maxime</strong> (Bleu 💙)<br>
+            Vous avez chacun votre propre parcours à suivre !
+        </div>
+        <div class="intro-texte">
+            📜 Suivez les indices de <strong>VOTRE COULEUR</strong> uniquement<br>
+            🔢 À la fin, vous trouverez chacun <strong>UN CHIFFRE SECRET</strong><br>
+            🤝 Réunissez vos 3 chiffres pour former le <strong>CODE DU TRÉSOR</strong>
+        </div>
+        <div class="intro-important">
+            ⚠️ ATTENTION : Ne courez pas ! Chacun son parcours !<br>
+            Le trésor ne s'ouvrira qu'avec les 3 chiffres réunis ! 🏆
+        </div>
+    </div>
+
+    <div style="text-align: center; font-size: 14px; color: #666; margin-top: 20px;">
+        ✂️ Découper chaque bande suivant les pointillés ✂️
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PARCOURS CAPUCINE (VIOLET) -->
+<div class="container">
+    <div class="section-titre" style="color: #6A1B9A;">💜 PARCOURS DE CAPUCINE 💜</div>
+
+    <!-- Indice 1 -->
+    <div class="indice-bande capucine">
+        <div class="cachette">💜 CAPUCINE • 1/7 • 📍 DÉPART</div>
+        <div class="header">
+            <div class="numero">💜 INDICE 1/7 💜</div>
+            <div class="emoji">📚</div>
+        </div>
+        <div class="texte-indice">
+            Dans ta chambre, cherche parmi tes livres préférés,<br>
+            Dans la bibliothèque, ton prochain indice est caché !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 2 -->
+    <div class="indice-bande capucine">
+        <div class="cachette">💜 CAPUCINE • 2/7 • 📍 Bibliothèque</div>
+        <div class="header">
+            <div class="numero">💜 INDICE 2/7 💜</div>
+            <div class="emoji">🎹</div>
+        </div>
+        <div class="texte-indice">
+            Là où résonnent les notes de musique,<br>
+            Sur l'instrument noir et blanc, cherche vite !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 3 -->
+    <div class="indice-bande capucine">
+        <div class="cachette">💜 CAPUCINE • 3/7 • 📍 Piano</div>
+        <div class="header">
+            <div class="numero">💜 INDICE 3/7 💜</div>
+            <div class="emoji">🍳</div>
+        </div>
+        <div class="texte-indice">
+            Dans la cuisine, là où papa range les fourchettes et couteaux,<br>
+            Ouvre le tiroir des couverts, tu es sur la bonne voie !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 4 -->
+    <div class="indice-bande capucine">
+        <div class="cachette">💜 CAPUCINE • 4/7 • 📍 Tiroir couverts</div>
+        <div class="header">
+            <div class="numero">💜 INDICE 4/7 💜</div>
+            <div class="emoji">🌶️</div>
+        </div>
+        <div class="texte-indice">
+            Parmi les petits pots qui donnent du goût aux plats,<br>
+            Dans les épices se cache ce que tu cherches déjà !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 5 -->
+    <div class="indice-bande capucine">
+        <div class="cachette">💜 CAPUCINE • 5/7 • 📍 Épices</div>
+        <div class="header">
+            <div class="numero">💜 INDICE 5/7 💜</div>
+            <div class="emoji">🛁</div>
+        </div>
+        <div class="texte-indice">
+            Va te laver les mains ! Dans la salle de bain,<br>
+            Regarde dans le lavabo de gauche, tu y es presque enfin !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 6 -->
+    <div class="indice-bande capucine">
+        <div class="cachette">💜 CAPUCINE • 6/7 • 📍 Lavabo gauche</div>
+        <div class="header">
+            <div class="numero">💜 INDICE 6/7 💜</div>
+            <div class="emoji">👔</div>
+        </div>
+        <div class="texte-indice">
+            Dans la chambre de papa et maman, cherche dans leurs tiroirs,<br>
+            Ouvre celui des chaussettes, tu verras ton espoir !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 7 FINAL -->
+    <div class="indice-bande capucine">
+        <div class="cachette">💜 CAPUCINE • 7/7 • 📍 Tiroir chaussettes</div>
+        <div class="header">
+            <div class="numero">💜 INDICE 7/7 - TON CHIFFRE ! 💜</div>
+            <div class="emoji">🎯</div>
+        </div>
+        <div class="texte-indice">
+            BRAVO CAPUCINE ! Tu as trouvé ton chiffre secret :<br>
+            <div class="code-box" style="margin: 10px 0;">
+                <div class="code-valeur" style="color: #6A1B9A;">3</div>
+            </div>
+            Note-le et attends tes frère et sœur !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PARCOURS MATHILDE (ROSE) -->
+<div class="container">
+    <div class="section-titre" style="color: #880E4F;">💗 PARCOURS DE MATHILDE 💗</div>
+
+    <!-- Indice 1 -->
+    <div class="indice-bande mathilde">
+        <div class="cachette">💗 MATHILDE • 1/7 • 📍 DÉPART</div>
+        <div class="header">
+            <div class="numero">💗 INDICE 1/7 💗</div>
+            <div class="emoji">🎨</div>
+        </div>
+        <div class="texte-indice">
+            Dans le salon, cherche là où sont rangés les dessins colorés,<br>
+            Dans la boîte à dessins, ton aventure va commencer !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 2 -->
+    <div class="indice-bande mathilde">
+        <div class="cachette">💗 MATHILDE • 2/7 • 📍 Boîte dessins</div>
+        <div class="header">
+            <div class="numero">💗 INDICE 2/7 💗</div>
+            <div class="emoji">🎸</div>
+        </div>
+        <div class="texte-indice">
+            Là où résonnent les cordes qui grattent,<br>
+            Sur l'instrument à 6 cordes, ton indice t'attend sans accroc !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 3 -->
+    <div class="indice-bande mathilde">
+        <div class="cachette">💗 MATHILDE • 3/7 • 📍 Guitare</div>
+        <div class="header">
+            <div class="numero">💗 INDICE 3/7 💗</div>
+            <div class="emoji">🍽️</div>
+        </div>
+        <div class="texte-indice">
+            Dans la cuisine, là où on range les verres et assiettes,<br>
+            Ouvre le placard, tu es sur une piste chouette !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 4 -->
+    <div class="indice-bande mathilde">
+        <div class="cachette">💗 MATHILDE • 4/7 • 📍 Placard verres</div>
+        <div class="header">
+            <div class="numero">💗 INDICE 4/7 💗</div>
+            <div class="emoji">❄️</div>
+        </div>
+        <div class="texte-indice">
+            Je garde la nourriture bien au frais toute la journée,<br>
+            Ouvre-moi et dans mes tiroirs tu pourras chercher !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 5 -->
+    <div class="indice-bande mathilde">
+        <div class="cachette">💗 MATHILDE • 5/7 • 📍 Frigo</div>
+        <div class="header">
+            <div class="numero">💗 INDICE 5/7 💗</div>
+            <div class="emoji">🚿</div>
+        </div>
+        <div class="texte-indice">
+            Dans la salle de bain, cherche dans le meuble avec un miroir,<br>
+            Ouvre le placard miroir pour continuer ton histoire !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 6 -->
+    <div class="indice-bande mathilde">
+        <div class="cachette">💗 MATHILDE • 6/7 • 📍 Placard miroir</div>
+        <div class="header">
+            <div class="numero">💗 INDICE 6/7 💗</div>
+            <div class="emoji">🛏️</div>
+        </div>
+        <div class="texte-indice">
+            Dans ta chambre, là où tu poses ta tête chaque soir,<br>
+            Sous l'oreiller de Mathilde se trouve ton dernier espoir !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 7 FINAL -->
+    <div class="indice-bande mathilde">
+        <div class="cachette">💗 MATHILDE • 7/7 • 📍 Oreiller</div>
+        <div class="header">
+            <div class="numero">💗 INDICE 7/7 - TON CHIFFRE ! 💗</div>
+            <div class="emoji">🎯</div>
+        </div>
+        <div class="texte-indice">
+            BRAVO MATHILDE ! Tu as trouvé ton chiffre secret :<br>
+            <div class="code-box" style="margin: 10px 0;">
+                <div class="code-valeur" style="color: #880E4F;">7</div>
+            </div>
+            Note-le et attends tes frère et sœur !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PARCOURS MAXIME (BLEU) -->
+<div class="container">
+    <div class="section-titre" style="color: #01579B;">💙 PARCOURS DE MAXIME 💙</div>
+
+    <!-- Indice 1 -->
+    <div class="indice-bande maxime">
+        <div class="cachette">💙 MAXIME • 1/7 • 📍 DÉPART</div>
+        <div class="header">
+            <div class="numero">💙 INDICE 1/7 💙</div>
+            <div class="emoji">🖍️</div>
+        </div>
+        <div class="texte-indice">
+            Dans le salon, là où sont rangés les stylos de couleur,<br>
+            Dans la boîte à feutres commence ton bonheur !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 2 -->
+    <div class="indice-bande maxime">
+        <div class="cachette">💙 MAXIME • 2/7 • 📍 Boîte feutres</div>
+        <div class="header">
+            <div class="numero">💙 INDICE 2/7 💙</div>
+            <div class="emoji">🎮</div>
+        </div>
+        <div class="texte-indice">
+            Là où sont rangés tous les jeux de société,<br>
+            Dans le meuble des jeux, tu dois chercher !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 3 -->
+    <div class="indice-bande maxime">
+        <div class="cachette">💙 MAXIME • 3/7 • 📍 Meuble jeux</div>
+        <div class="header">
+            <div class="numero">💙 INDICE 3/7 💙</div>
+            <div class="emoji">🥣</div>
+        </div>
+        <div class="texte-indice">
+            Dans la cuisine, là où tu prends tes céréales le matin,<br>
+            Dans le placard du petit déj, continue ton chemin !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 4 -->
+    <div class="indice-bande maxime">
+        <div class="cachette">💙 MAXIME • 4/7 • 📍 Placard petit déj</div>
+        <div class="header">
+            <div class="numero">💙 INDICE 4/7 💙</div>
+            <div class="emoji">🍟</div>
+        </div>
+        <div class="texte-indice">
+            Là où on fait cuire les frites bien dorées,<br>
+            Dans la friteuse se cache ce que tu dois trouver !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 5 -->
+    <div class="indice-bande maxime">
+        <div class="cachette">💙 MAXIME • 5/7 • 📍 Friteuse</div>
+        <div class="header">
+            <div class="numero">💙 INDICE 5/7 💙</div>
+            <div class="emoji">💊</div>
+        </div>
+        <div class="texte-indice">
+            Dans la salle de bain, là où sont les médicaments,<br>
+            Dans le placard à médocs, cherche maintenant !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 6 -->
+    <div class="indice-bande maxime">
+        <div class="cachette">💙 MAXIME • 6/7 • 📍 Placard médocs</div>
+        <div class="header">
+            <div class="numero">💙 INDICE 6/7 💙</div>
+            <div class="emoji">🩲</div>
+        </div>
+        <div class="texte-indice">
+            Dans la chambre de papa et maman, cherche dans le tiroir,<br>
+            Celui des caleçons contient ton dernier espoir !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+
+    <!-- Indice 7 FINAL -->
+    <div class="indice-bande maxime">
+        <div class="cachette">💙 MAXIME • 7/7 • 📍 Tiroir caleçons</div>
+        <div class="header">
+            <div class="numero">💙 INDICE 7/7 - TON CHIFFRE ! 💙</div>
+            <div class="emoji">🎯</div>
+        </div>
+        <div class="texte-indice">
+            BRAVO MAXIME ! Tu as trouvé ton chiffre secret :<br>
+            <div class="code-box" style="margin: 10px 0;">
+                <div class="code-valeur" style="color: #01579B;">5</div>
+            </div>
+            Note-le et attends ton frère et ta sœur !
+        </div>
+        <div class="footer">
+            <span class="scissors">✂️</span>
+        </div>
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PAGE FINALE - LE TRÉSOR -->
+<div class="container">
+    <div class="titre-principal" style="color: #FF6B6B;">🏆 LE GRAND FINAL 🏆</div>
+
+    <!-- Carte finale découpable -->
+    <div style="border: 3px dashed #FF8C00; border-radius: 15px; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); padding: 25px; margin-bottom: 30px;">
+        <div style="text-align: center; font-size: 26px; font-weight: bold; color: #8B4513; margin-bottom: 20px;">
+            ✨ FÉLICITATIONS ! INDICES RÉUNIS ✨
+        </div>
+
+        <div style="background-color: rgba(255,255,255,0.9); border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+            <p style="font-size: 18px; color: #333; text-align: center; line-height: 1.8; margin-bottom: 15px;">
+                Quand vous avez tous les 3 trouvé vos chiffres,<br>
+                <strong>réunissez-vous</strong> et formez le CODE SECRET dans l'ordre :
+            </p>
+
+            <div style="text-align: center; font-size: 20px; margin: 15px 0; color: #333;">
+                <strong style="color: #6A1B9A;">CAPUCINE (💜)</strong> -
+                <strong style="color: #880E4F;">MATHILDE (💗)</strong> -
+                <strong style="color: #01579B;">MAXIME (💙)</strong>
+            </div>
+        </div>
+
+        <div style="background-color: #FFFACD; border: 4px solid #FFD700; border-radius: 15px; padding: 20px; text-align: center; margin-bottom: 20px;">
+            <div style="font-size: 22px; font-weight: bold; color: #FF6B6B; margin-bottom: 10px;">
+                🔐 CODE DU TRÉSOR :
+            </div>
+            <div style="font-size: 48px; font-weight: bold; color: #333; letter-spacing: 20px;">
+                3 - 7 - 5
+            </div>
+        </div>
+
+        <div style="background-color: rgba(255,255,255,0.9); border-radius: 10px; padding: 20px; text-align: center;">
+            <p style="font-size: 20px; color: #333; margin-bottom: 10px;">
+                🎁 Le trésor est caché dans :
+            </p>
+            <p style="font-size: 24px; font-weight: bold; color: #FF6B6B;">
+                LA GAMELLE DE TWINGO ET MARCEL 🐕
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 15px; font-size: 14px; color: #8B4513; font-style: italic;">
+            📍 À placer avec le trésor final • ✂️
+        </div>
+    </div>
+
+    <!-- Guide de préparation -->
+    <div style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-radius: 15px; border: 3px solid #4CAF50; padding: 25px; page-break-inside: avoid;">
+
+        <div style="text-align: center; font-size: 24px; font-weight: bold; color: #2E7D32; margin-bottom: 20px;">
+            📋 GUIDE DE PRÉPARATION
+        </div>
+
+        <div style="background-color: white; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+            <div style="font-size: 16px; color: #1B5E20; margin-bottom: 15px; line-height: 1.8;">
+                <strong>✂️ Étape 1 - Découpage :</strong><br>
+                Découpez les 21 bandes individuelles (7 violettes + 7 roses + 7 bleues) + la carte finale dorée
+            </div>
+
+            <div style="font-size: 16px; color: #1B5E20; margin-bottom: 10px;">
+                <strong>📦 Étape 2 - Ordre de cachette (commencer par la fin) :</strong>
+            </div>
+        </div>
+
+        <div style="background-color: white; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+            <div style="margin-bottom: 20px;">
+                <div style="font-size: 16px; font-weight: bold; color: #6A1B9A; margin-bottom: 8px;">
+                    💜 CAPUCINE (Violet) :
+                </div>
+                <div style="font-size: 14px; color: #333; line-height: 1.6; padding-left: 15px;">
+                    <strong>7</strong> → Tiroir chaussettes parents<br>
+                    <strong>6</strong> → Lavabo gauche<br>
+                    <strong>5</strong> → Épices<br>
+                    <strong>4</strong> → Tiroir couverts<br>
+                    <strong>3</strong> → Piano<br>
+                    <strong>2</strong> → Bibliothèque Capu<br>
+                    <strong>1</strong> → <span style="background-color: #FFFACD; padding: 2px 8px; border-radius: 5px; font-weight: bold;">DONNER À CAPUCINE</span>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <div style="font-size: 16px; font-weight: bold; color: #880E4F; margin-bottom: 8px;">
+                    💗 MATHILDE (Rose) :
+                </div>
+                <div style="font-size: 14px; color: #333; line-height: 1.6; padding-left: 15px;">
+                    <strong>7</strong> → Oreiller Mathilde<br>
+                    <strong>6</strong> → Placard miroir<br>
+                    <strong>5</strong> → Frigo<br>
+                    <strong>4</strong> → Placard verres/assiettes<br>
+                    <strong>3</strong> → Guitare<br>
+                    <strong>2</strong> → Boîte à dessins<br>
+                    <strong>1</strong> → <span style="background-color: #FFFACD; padding: 2px 8px; border-radius: 5px; font-weight: bold;">DONNER À MATHILDE</span>
+                </div>
+            </div>
+
+            <div>
+                <div style="font-size: 16px; font-weight: bold; color: #01579B; margin-bottom: 8px;">
+                    💙 MAXIME (Bleu) :
+                </div>
+                <div style="font-size: 14px; color: #333; line-height: 1.6; padding-left: 15px;">
+                    <strong>7</strong> → Tiroir caleçons parents<br>
+                    <strong>6</strong> → Placard médocs<br>
+                    <strong>5</strong> → Friteuse<br>
+                    <strong>4</strong> → Placard petit déj<br>
+                    <strong>3</strong> → Meuble jeux<br>
+                    <strong>2</strong> → Boîte à feutres<br>
+                    <strong>1</strong> → <span style="background-color: #FFFACD; padding: 2px 8px; border-radius: 5px; font-weight: bold;">DONNER À MAXIME</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="background-color: #FFFACD; border: 2px solid #FFD700; border-radius: 10px; padding: 20px; text-align: center;">
+            <div style="font-size: 18px; font-weight: bold; color: #2E7D32; margin-bottom: 10px;">
+                🎁 PLACEMENT DU TRÉSOR
+            </div>
+            <div style="font-size: 15px; color: #333; line-height: 1.8;">
+                Placez le <strong>TRÉSOR</strong> + la <strong>CARTE FINALE DORÉE</strong><br>
+                dans la <strong>GAMELLE DE TWINGO/MARCEL</strong> 🐕
+            </div>
+        </div>
+
+        <div style="margin-top: 20px; padding: 15px; background-color: rgba(255,255,255,0.7); border-radius: 8px; text-align: center;">
+            <div style="font-size: 14px; color: #1B5E20; line-height: 1.6;">
+                💡 <strong>Astuce :</strong> Les enfants devront se réunir et combiner leurs 3 chiffres<br>
+                (3-7-5) pour confirmer qu'ils ont tous réussi avant de trouver le trésor !
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
